@@ -12,7 +12,7 @@ func main() {
 		Headers: map[string]string{"Content-Type": "application/json"},
 	}
 
-	res, err := request.Post("", map[string]string{"success": "true"}, &requests.Config{Http: true})
+	res, err := request.Delete("", map[string]string{"success": "true"}, &requests.Config{Http: true})
 	if err != nil {
 		fmt.Println(err)
 		return
