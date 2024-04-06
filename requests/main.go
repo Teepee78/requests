@@ -16,3 +16,11 @@ type Response struct {
 	Cookies []*http.Cookie
 	Request *http.Request
 }
+
+/*
+Create a custom request with set config
+*/
+type Request struct {
+	BaseUrl string
+	Headers map[string]string
+}
