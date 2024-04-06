@@ -3,20 +3,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/kompere/kompere-api/requests"
+	"github.com/joho/godotenv"
+	"github.com/kompere/kompere-api/api"
 )
 
 func main() {
-	request := &requests.Request{
-		BaseUrl: "https://webhook.site/5146b497-397b-4675-81b3-8b100345418a",
-		Headers: map[string]string{"Content-Type": "application/json"},
+	// Load variables from .env file
+	if err := godotenv.Load(); err != nil {
+		panic(fmt.Sprintf("Error loading .env file: %v", err))
 	}
 
-	res, err := request.Delete("", map[string]string{"success": "true"}, &requests.Config{Http: true})
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	fmt.Println(res.Body)
+	api.StartServer()
 }
