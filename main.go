@@ -8,29 +8,15 @@ import (
 
 func main() {
 	request := &requests.Request{
-		BaseUrl: "https://vendstash.mitochronhub.com",
+		BaseUrl: "https://webhook.site/5146b497-397b-4675-81b3-8b100345418a",
 		Headers: map[string]string{"Content-Type": "application/json"},
 	}
 
-	res, err := request.GetAsync("/orders", &requests.Config{})
+	res, err := request.Post("", map[string]string{"success": "true"}, &requests.Config{Http: true})
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	done := make(chan bool)
-	go func() {
-		response := <-res
-		fmt.Println(response.Body)
-		done <- true
-	}()
-
-	sync, err := request.Get("", nil)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(sync.Body)
-
-	<-done
+	fmt.Println(res.Body)
 }
