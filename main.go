@@ -1,17 +1,28 @@
-package main
+package requests
 
 import (
-	"fmt"
-
-	"github.com/joho/godotenv"
-	"github.com/kompere/kompere-api/api"
+	"net/http"
 )
 
-func main() {
-	// Load variables from .env file
-	if err := godotenv.Load(); err != nil {
-		panic(fmt.Sprintf("Error loading .env file: %v", err))
-	}
+var client = &http.Client{}
 
-	api.StartServer()
+type Config struct {
+	Http    bool
+	Headers map[string]string
+}
+
+type Response struct {
+	Status  int
+	Body    interface{}
+	Headers http.Header
+	Cookies []*http.Cookie
+	Request *http.Request
+}
+
+/*
+Create a custom request with set config
+*/
+type Request struct {
+	BaseUrl string
+	Headers map[string]string
 }
