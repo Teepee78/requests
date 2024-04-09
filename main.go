@@ -26,3 +26,10 @@ type Request struct {
 	BaseUrl string
 	Headers map[string]string
 }
+
+func CreateRequest(baseUrl string, headers map[string]string) *Request {
+	return &Request{
+		BaseUrl: baseUrl,
+		Headers: headers,
+	}
+}
